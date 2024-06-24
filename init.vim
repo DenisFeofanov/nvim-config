@@ -9,3 +9,5 @@
    set relativenumber
    let mapleader = "\<Space>"
    nnoremap <leader>h :noh<CR>
+   nnoremap <C-u> <C-u>zz
+   nnoremap <C-d> <C-d>zz

@@ -2,6 +2,7 @@
 
    " Add VimBeGood plugin
    Plug 'ThePrimeagen/vim-be-good'
+   Plug 'kylechui/nvim-surround'
 
    call plug#end()
    
@@ -11,3 +12,5 @@
    nnoremap <leader>h :noh<CR>
    nnoremap <C-u> <C-u>zz
    nnoremap <C-d> <C-d>zz
+   nnoremap n nzzzv
+   nnoremap N Nzzzv

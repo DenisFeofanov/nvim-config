@@ -1,6 +1,5 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Add VimBeGood plugin
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'kylechui/nvim-surround'
 
@@ -13,6 +12,7 @@ require("nvim-surround").setup({
 })
 EOF
 
+
 set number
 set relativenumber
 let mapleader = "\<Space>"
@@ -21,4 +21,9 @@ nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nmap <leader>s <Cmd>call VSCodeCall('workbench.action.gotoSymbol')<CR>
+nmap <leader>w <Cmd>call VSCodeCall('workbench.action.showAllSymbols')<CR>
+nmap <leader>f <Cmd>call VSCodeCall('actions.find')<CR>
+nmap <leader>r <Cmd>call VSCodeCall('editor.action.startFindReplaceAction')<CR>
+set clipboard+=unnamedplus
 

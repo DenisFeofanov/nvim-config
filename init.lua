@@ -64,6 +64,7 @@ vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", { norema
 
 vim.opt.clipboard:append("unnamedplus")
 
+
 -- Set up highlight for yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight_yank', {}),

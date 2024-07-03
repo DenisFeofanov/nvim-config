@@ -9,7 +9,6 @@ local ensure_packer = function()
   end
   return false
 end
-
 local packer_bootstrap = ensure_packer()
 
 -- Plugin management with packer
@@ -69,18 +68,36 @@ local function auto_sync()
   local handle = io.popen("git -C " .. vim.fn.stdpath("config") .. " status --porcelain")
   local result = handle:read("*a")
   handle:close()
-
   if result ~= "" then
-    os.execute("git -C " .. vim.fn.stdpath("config") .. " add .")
-    os.execute('git -C ' .. vim.fn.stdpath("config") .. ' commit -m "Auto-sync Neovim config"')
-    os.execute("git -C " .. vim.fn.stdpath("config") .. " push")
-    print("Neovim config auto-synced")
+    local output = vim.fn.system("git -C " .. vim.fn.stdpath("config") .. " add .")
+    output = output .. vim.fn.system('git -C ' .. vim.fn.stdpath("config") .. ' commit -m "Auto-sync Neovim config"')
+    output = output .. vim.fn.system("git -C " .. vim.fn.stdpath("config") .. " push")
+    
+    if output:match("error") or output:match("fatal") then
+      print("Unusual messages during auto-sync:")
+      print(output)
+      vim.fn.input("Press Enter to continue...")
+    else
+      print("Neovim config auto-synced")
+    end
   end
 end
 
--- Set up autocmd for auto-sync on exit
-vim.api.nvim_create_autocmd("VimLeavePre", {
+-- Set up autocmd for auto-sync on config file change
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  pattern = vim.fn.stdpath("config") .. "/**/*.{lua,vim}",
   callback = auto_sync
+})
+
+-- Sync settings on startup
+auto_sync()
+
+-- Set up highlight for yanked text
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('highlight_yank', {}),
+  callback = function()
+    vim.highlight.on_yank({higroup = 'IncSearch', timeout = 700})
+  end,
 })
 
 -- Automatically set up your configuration after cloning packer.nvim

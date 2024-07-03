@@ -64,35 +64,6 @@ vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", { norema
 
 vim.opt.clipboard:append("unnamedplus")
 
--- Auto-sync function
-local function auto_sync()
-  local handle = io.popen("git -C " .. vim.fn.stdpath("config") .. " status --porcelain")
-  local result = handle:read("*a")
-  handle:close()
-  if result ~= "" then
-    local output = vim.fn.system("git -C " .. vim.fn.stdpath("config") .. " add .")
-    output = output .. vim.fn.system('git -C ' .. vim.fn.stdpath("config") .. ' commit -m "Auto-sync Neovim config"')
-    output = output .. vim.fn.system("git -C " .. vim.fn.stdpath("config") .. " push")
-    
-    if output:match("error") or output:match("fatal") then
-      print("Unusual messages during auto-sync:")
-      print(output)
-      vim.fn.input("Press Enter to continue...")
-    else
-      print("Neovim config auto-synced")
-    end
-  end
-end
-
--- Set up autocmd for auto-sync on config file change
-vim.api.nvim_create_autocmd({"BufWritePost"}, {
-  pattern = vim.fn.stdpath("config") .. "/*.lua",
-  callback = auto_sync
-})
-
--- Sync settings on startup
-auto_sync()
-
 -- Set up highlight for yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight_yank', {}),

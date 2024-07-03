@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["cutlass.nvim"] = {
+    loaded = true,
+    path = "/home/denis/.local/share/nvim/site/pack/packer/start/cutlass.nvim",
+    url = "https://github.com/gbprod/cutlass.nvim"
+  },
   ["nvim-surround"] = {
     loaded = true,
     path = "/home/denis/.local/share/nvim/site/pack/packer/start/nvim-surround",
@@ -83,6 +88,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/denis/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["substitute.nvim"] = {
+    loaded = true,
+    path = "/home/denis/.local/share/nvim/site/pack/packer/start/substitute.nvim",
+    url = "https://github.com/gbprod/substitute.nvim"
   },
   ["vim-be-good"] = {
     loaded = true,

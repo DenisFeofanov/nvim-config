@@ -86,7 +86,7 @@ end
 
 -- Set up autocmd for auto-sync on config file change
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
-  pattern = vim.fn.stdpath("config") .. "/**/*.lua",
+  pattern = vim.fn.stdpath("config") .. "/*.lua",
   callback = auto_sync
 })
 
@@ -97,7 +97,7 @@ auto_sync()
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight_yank', {}),
   callback = function()
-    vim.highlight.on_yank({higroup = 'IncSearch', timeout = 200})
+    vim.highlight.on_yank({higroup = 'IncSearch', timeout = 201})
   end,
 })
 

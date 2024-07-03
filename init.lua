@@ -11,6 +11,7 @@ local ensure_packer = function()
 end
 local packer_bootstrap = ensure_packer()
 
+
 -- Plugin management with packer
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
@@ -85,7 +86,7 @@ end
 
 -- Set up autocmd for auto-sync on config file change
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
-  pattern = vim.fn.stdpath("config") .. "/**/*.{lua,vim}",
+  pattern = vim.fn.stdpath("config") .. "/**/*.lua",
   callback = auto_sync
 })
 

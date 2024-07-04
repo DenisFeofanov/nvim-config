@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/denis/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/denis/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/denis/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/denis/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/denis/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/feofanov/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/feofanov/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/feofanov/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/feofanov/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/feofanov/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -76,27 +76,27 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["cutlass.nvim"] = {
     loaded = true,
-    path = "/home/denis/.local/share/nvim/site/pack/packer/start/cutlass.nvim",
+    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/cutlass.nvim",
     url = "https://github.com/gbprod/cutlass.nvim"
   },
   ["nvim-surround"] = {
     loaded = true,
-    path = "/home/denis/.local/share/nvim/site/pack/packer/start/nvim-surround",
+    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/nvim-surround",
     url = "https://github.com/kylechui/nvim-surround"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/denis/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["substitute.nvim"] = {
     loaded = true,
-    path = "/home/denis/.local/share/nvim/site/pack/packer/start/substitute.nvim",
+    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/substitute.nvim",
     url = "https://github.com/gbprod/substitute.nvim"
   },
   ["vim-be-good"] = {
     loaded = true,
-    path = "/home/denis/.local/share/nvim/site/pack/packer/start/vim-be-good",
+    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/vim-be-good",
     url = "https://github.com/ThePrimeagen/vim-be-good"
   }
 }

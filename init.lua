@@ -80,3 +80,59 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 _G.open_nvim_config = function()
     vim.cmd('edit ~/.config/nvim/init.lua')
 end
+
+-- Function to pull changes from Git
+local function git_pull()
+    local handle = io.popen("cd ~/.config/nvim && git pull 2>&1")
+    if handle then
+        local result = handle:read("*a")
+        handle:close()
+        if result:match("Already up to date") then
+            print("Neovim config is up to date")
+        elseif result:match("Updating") then
+            print("Pulled new changes for Neovim config")
+        else
+            print("Error pulling changes: " .. result)
+        end
+    else
+        print("Failed to execute git pull")
+    end
+end
+
+-- Function to push changes to Git
+local function git_push()
+    local handle = io.popen(
+        "cd ~/.config/nvim && git add . && git commit -m 'Auto-commit on Neovim exit' && git push 2>&1")
+    if handle then
+        local result = handle:read("*a")
+        handle:close()
+        if result:match("nothing to commit") then
+            print("No changes to push")
+        elseif result:match("master -> master") then
+            print("Pushed changes to Neovim config repository")
+        else
+            print("Error pushing changes: " .. result)
+        end
+    else
+        print("Failed to execute git push")
+    end
+end
+
+-- Set up autocommands for git operations
+vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("GitPullGroup", {
+        clear = true
+    }),
+    callback = function()
+        git_pull()
+    end
+})
+
+vim.api.nvim_create_autocmd("VimLeave", {
+    group = vim.api.nvim_create_augroup("GitPushGroup", {
+        clear = true
+    }),
+    callback = function()
+        git_push()
+    end
+})

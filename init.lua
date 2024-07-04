@@ -102,7 +102,7 @@ end
 -- Function to push changes to Git
 local function git_push()
     local handle = io.popen(
-        "cd ~/.config/nvim && giit add . && git commit -m 'Auto-commit on Neovim exit' && git push 2>&1")
+        "cd ~/.config/nvim && git add . && git commit -m 'Auto-commit on Neovim exit' && git push 2>&1")
     if handle then
         local result = handle:read("*a")
         handle:close()

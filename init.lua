@@ -81,58 +81,91 @@ _G.open_nvim_config = function()
     vim.cmd('edit ~/.config/nvim/init.lua')
 end
 
+-- Function to log messages
+local log_file = vim.fn.stdpath("data") .. "/nvim_git_sync.log"
+local function log_message(message)
+    local file = io.open(log_file, "a")
+    if file then
+        file:write(os.date("%Y-%m-%d %H:%M:%S") .. " - " .. message .. "\n")
+        file:close()
+    end
+end
+
 -- Function to pull changes from Git
 local function git_pull()
     local handle = io.popen("cd ~/.config/nvim && git pull 2>&1")
     if handle then
         local result = handle:read("*a")
         handle:close()
+        log_message("Git pull result: " .. result)
         if result:match("Already up to date") then
-            print("Neovim config is up to date")
+            vim.notify("Neovim config is up to date", vim.log.levels.INFO)
         elseif result:match("Updating") then
-            print("Pulled new changes for Neovim config")
+            vim.notify("Pulled new changes for Neovim config", vim.log.levels.INFO)
         else
-            print("Error pulling changes: " .. result)
+            vim.notify("Error pulling changes. Check log for details.", vim.log.levels.ERROR)
         end
     else
-        print("Failed to execute git pull")
+        log_message("Failed to execute git pull")
+        vim.notify("Failed to execute git pull. Check log for details.", vim.log.levels.ERROR)
     end
 end
 
 -- Function to push changes to Git
 local function git_push()
-    local handle = io.popen(
-        "cd ~/.config/nvim && git add . && git commit -m 'Auto-commit on Neovim exit' && git push 2>&1")
+    local handle = io.popen("cd ~/.config/nvim && git add . && git commit -m 'Auto-commit on Neovim exit' && git push 2>&1")
     if handle then
         local result = handle:read("*a")
         handle:close()
+        log_message("Git push result: " .. result)
         if result:match("nothing to commit") then
-            print("No changes to push")
+            vim.notify("No changes to push", vim.log.levels.INFO)
         elseif result:match("master -> master") then
-            print("Pushed changes to Neovim config repository")
+            vim.notify("Pushed changes to Neovim config repository", vim.log.levels.INFO)
         else
-            print("Error pushing changes: " .. result)
+            vim.notify("Error pushing changes. Check log for details.", vim.log.levels.ERROR)
         end
     else
-        print("Failed to execute git push")
+        log_message("Failed to execute git push")
+        vim.notify("Failed to execute git push. Check log for details.", vim.log.levels.ERROR)
+    end
+end
+
+-- Function to display log contents
+local function display_log()
+    local file = io.open(log_file, "r")
+    if file then
+        local content = file:read("*all")
+        file:close()
+        vim.cmd("new")  -- Open a new buffer
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(content, "\n"))
+        vim.bo.buftype = "nofile"
+        vim.bo.bufhidden = "wipe"
+        vim.bo.swapfile = false
+        vim.bo.filetype = "log"
+        vim.cmd("normal! G")  -- Move cursor to the end of the buffer
+    else
+        vim.notify("Could not open log file", vim.log.levels.ERROR)
     end
 end
 
 -- Set up autocommands for git operations
 vim.api.nvim_create_autocmd("VimEnter", {
-    group = vim.api.nvim_create_augroup("GitPullGroup", {
-        clear = true
-    }),
+    group = vim.api.nvim_create_augroup("GitPullGroup", { clear = true }),
     callback = function()
         git_pull()
-    end
+    end,
 })
 
-vim.api.nvim_create_autocmd("VimLeave", {
-    group = vim.api.nvim_create_augroup("GitPushGroup", {
-        clear = true
-    }),
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = vim.api.nvim_create_augroup("GitPushGroup", { clear = true }),
     callback = function()
         git_push()
-    end
+    end,
 })
+
+-- Command to display log
+vim.api.nvim_create_user_command("DisplayGitSyncLog", display_log, {})
+
+-- Keybinding to display log
+vim.api.nvim_set_keymap('n', '<leader>gl', ':DisplayGitSyncLog<CR>', { noremap = true, silent = true })

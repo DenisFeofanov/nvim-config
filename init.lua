@@ -1,3 +1,17 @@
+-- Auto-install Packer if not present
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 -- Plugin management with packer
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
@@ -5,25 +19,46 @@ require('packer').startup(function(use)
     use 'kylechui/nvim-surround'
     use 'gbprod/cutlass.nvim'
     use 'gbprod/substitute.nvim'
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)
 
--- Configure nvim-surround
-require("nvim-surround").setup({
-    -- Configuration options here
+-- Auto-install plugins
+vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerComplete",
+    callback = function()
+        vim.cmd "bw | silent! MasonUpdate" -- close packer window
+        require("packer").compile()
+        vim.api.nvim_exec_autocmds("User", { pattern = "ConfigReady" })
+    end,
 })
 
--- Configure cutlass
-require('cutlass').setup({
-    cut_key = 'x',
-    override_del = nil,
-    exclude = {}
-})
+-- Configure plugins after they're installed
+vim.api.nvim_create_autocmd("User", {
+    pattern = "ConfigReady",
+    callback = function()
+        -- Configure nvim-surround
+        require("nvim-surround").setup({
+            -- Configuration options here
+        })
 
--- Configure substitute
-require('substitute').setup({
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
+        -- Configure cutlass
+        require('cutlass').setup({
+            cut_key = 'x',
+            override_del = nil,
+            exclude = {}
+        })
+
+        -- Configure substitute
+        require('substitute').setup({
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        })
+    end,
 })
 
 -- Set options

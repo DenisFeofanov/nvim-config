@@ -48,7 +48,8 @@ vim.keymap.set('n', '<leader>s', '<Cmd>call VSCodeCall("workbench.action.gotoSym
 vim.keymap.set('n', '<leader>w', '<Cmd>call VSCodeCall("workbench.action.showAllSymbols")<CR>')
 vim.keymap.set('n', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
-vim.keymap.set('n', '<CR>', 'o<Esc>')
+vim.keymap.set('n', '<CR>', "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
+vim.api.nvim_set_keymap('n', '<leader>sync', ':lua sync_nvim_config()<CR>', { noremap = true, silent = true })
 
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
@@ -65,6 +66,8 @@ vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", {
 })
 
 vim.opt.clipboard:append("unnamedplus")
+   
+
 
 -- Set up highlight for yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -81,3 +84,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 _G.open_nvim_config = function()
     vim.cmd('edit ~/.config/nvim/init.lua')
 end
+
+-- Function to sync Neovim config
+_G.sync_nvim_config = function()
+    local handle = io.popen("cd ~/.config/nvim && git pull && git add . && git commit -m 'Auto-sync Neovim config' && git push")
+    if handle then
+        local result = handle:read("*a")
+        handle:close()
+        print("Neovim config synced: " .. result)
+    else
+        print("Failed to sync Neovim config")
+    end
+end
+

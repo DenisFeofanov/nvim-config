@@ -5,11 +5,6 @@ require('packer').startup(function(use)
     use 'kylechui/nvim-surround'
     use 'gbprod/cutlass.nvim'
     use 'gbprod/substitute.nvim'
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    if packer_bootstrap then
-        require('packer').sync()
-    end
 end)
 
 -- Configure nvim-surround

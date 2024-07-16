@@ -16,37 +16,9 @@ local packer_bootstrap = ensure_packer()
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'ThePrimeagen/vim-be-good'
-
-    use {
-        'kylechui/nvim-surround',
-        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-        config = function()
-            require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-            })
-        end
-    }
-
-    use {
-        'gbprod/cutlass.nvim',
-        config = function()
-            require('cutlass').setup({
-                cut_key = 'x',
-                override_del = nil,
-                exclude = {}
-            })
-        end
-    }
-
-    use {
-        'gbprod/substitute.nvim',
-        config = function()
-            require('substitute').setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-            })
-        end
-    }
+    use 'kylechui/nvim-surround'
+    use 'gbprod/cutlass.nvim'
+    use 'gbprod/substitute.nvim'
 
     -- Automatically set up your configuration after cloning packer.nvim
     if packer_bootstrap then
@@ -64,6 +36,25 @@ vim.api.nvim_create_autocmd("User", {
             pattern = "ConfigReady"
         })
     end
+})
+
+-- Configure nvim-surround
+require("nvim-surround").setup({
+    -- Configuration options here
+})
+
+-- Configure cutlass
+require('cutlass').setup({
+    cut_key = 'x',
+    override_del = nil,
+    exclude = {}
+})
+
+-- Configure substitute
+require('substitute').setup({
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
 })
 
 -- Set options

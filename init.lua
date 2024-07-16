@@ -1,17 +1,3 @@
--- Auto-install Packer if not present
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
-end
-
-local packer_bootstrap = ensure_packer()
-
 -- Plugin management with packer
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
@@ -25,18 +11,6 @@ require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
-
--- Auto-install plugins
-vim.api.nvim_create_autocmd("User", {
-    pattern = "PackerComplete",
-    callback = function()
-        vim.cmd "bw | silent! MasonUpdate" -- close packer window
-        require("packer").compile()
-        vim.api.nvim_exec_autocmds("User", {
-            pattern = "ConfigReady"
-        })
-    end
-})
 
 -- Configure nvim-surround
 require("nvim-surround").setup({

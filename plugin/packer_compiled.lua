@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/cutlass.nvim",
     url = "https://github.com/gbprod/cutlass.nvim"
   },
-  ["nvim-surround"] = {
-    loaded = true,
-    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/nvim-surround",
-    url = "https://github.com/kylechui/nvim-surround"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -98,6 +93,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/vim-be-good",
     url = "https://github.com/ThePrimeagen/vim-be-good"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
   }
 }
 

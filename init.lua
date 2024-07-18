@@ -11,13 +11,19 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+-- Используйте protected call, чтобы мы не получали ошибку при первом использовании
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+  return
+end
+
 -- Plugin management with packer
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'ThePrimeagen/vim-be-good'
-    use 'kylechui/nvim-surround'
     use 'gbprod/cutlass.nvim'
     use 'gbprod/substitute.nvim'
+    use 'tpope/vim-surround'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -25,11 +31,6 @@ require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
-
--- Configure nvim-surround
-require("nvim-surround").setup({
-    -- Configuration options here
-})
 
 -- Configure cutlass
 require('cutlass').setup({

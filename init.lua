@@ -86,16 +86,3 @@ _G.open_nvim_config = function()
     vim.cmd('edit ~/.config/nvim/init.lua')
 end
 
--- Function to sync Neovim config
-_G.sync_nvim_config = function()
-    local handle = io.popen(
-        "cd ~/.config/nvim && git pull && git add . && git commit -m 'Auto-sync Neovim config' && git push")
-    if handle then
-        local result = handle:read("*a")
-        handle:close()
-        print("Neovim config synced: " .. result)
-    else
-        print("Failed to sync Neovim config")
-    end
-end
-

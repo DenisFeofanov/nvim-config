@@ -11,12 +11,6 @@ end
 
 local packer_bootstrap = ensure_packer()
 
--- Используйте protected call, чтобы мы не получали ошибку при первом использовании
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
-
 -- Plugin management with packer
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'

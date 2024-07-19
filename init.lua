@@ -15,9 +15,9 @@ local packer_bootstrap = ensure_packer()
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'ThePrimeagen/vim-be-good'
+    use 'kylechui/nvim-surround'
     use 'gbprod/cutlass.nvim'
     use 'gbprod/substitute.nvim'
-    use 'tpope/vim-surround'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -25,6 +25,11 @@ require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
+
+-- Configure nvim-surround
+require("nvim-surround").setup({
+    -- Configuration options here
+})
 
 -- Configure cutlass
 require('cutlass').setup({

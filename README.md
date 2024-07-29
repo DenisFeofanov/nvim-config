@@ -13,6 +13,5 @@ git clone https://github.com/DenisFeofanov/nvim-config.git ~/.config/nvim
 
 - Packer will be automatically installed if it's not present.
 - Plugins will be automatically installed.
-- Plugin configurations will be applied after the plugins are installed.
 
-4. TODO: Log in into github for sync command (optional)
+4. TODO: Log in into github for syncing the repo

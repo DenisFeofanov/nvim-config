@@ -67,11 +67,10 @@ vim.keymap.set('n', '<leader>s', '<Cmd>call VSCodeCall("workbench.action.gotoSym
 vim.keymap.set('n', '<leader>w', '<Cmd>call VSCodeCall("workbench.action.showAllSymbols")<CR>')
 vim.keymap.set('n', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
-vim.keymap.set('n', '<CR>', "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
-vim.api.nvim_set_keymap('n', '<leader>sync', ':lua sync_nvim_config()<CR>', {
-    noremap = true,
-    silent = true
-})
+vim.keymap.set('n', '<CR>', 'o<Esc>')
+vim.keymap.set('n', '<leader><CR>', 'O<Esc>')
+vim.keymap.set('n', '<leader>a', 'ggVG')
+vim.keymap.set('n', '<leader>ip', 'o<Esc>o<Esc>p')
 
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {

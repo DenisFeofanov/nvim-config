@@ -74,6 +74,9 @@ vim.keymap.set('n', '<leader>a', 'ggVG')
 vim.keymap.set('n', '<leader>ip', 'o<Esc>o<Esc>p')
 vim.keymap.set('n', '<leader>k', '<Cmd>call VSCodeCall("workbench.action.previousEditor")<CR>')
 vim.keymap.set('n', '<leader>j', '<Cmd>call VSCodeCall("workbench.action.nextEditor")<CR>')
+vim.keymap.set('n', '<leader>q', '<Cmd>call VSCodeCall("workbench.action.quickOpen")<CR>')
+vim.keymap.set('n', '<leader>c', '<Cmd>call VSCodeCall("workbench.action.showCommands")<CR>')
+vim.keymap.set('n', '<leader>gc', '<Cmd>call VSCodeCall("git.viewChanges")<CR>')
 
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {

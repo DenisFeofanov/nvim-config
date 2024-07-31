@@ -18,6 +18,7 @@ require('packer').startup(function(use)
     use 'kylechui/nvim-surround'
     use 'gbprod/cutlass.nvim'
     use 'gbprod/substitute.nvim'
+    use 'svermeulen/vim-yoink'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -85,6 +86,23 @@ vim.keymap.set("n", "S", "<cmd>lua require('substitute').eol()<cr>", {
 vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", {
     noremap = true
 })
+
+-- vim yoink config
+vim.g.yoinkIncludeDeleteOperations = 1
+vim.g.yoinkSavePersistently = 1
+vim.g.yoinkAutoFormatPaste = 1
+-- Swap back and forward through yank history
+vim.keymap.set('n', '<leader>n', '<Plug>(YoinkPostPasteSwapBack)', { silent = true })
+vim.keymap.set('n', '<leader>p', '<Plug>(YoinkPostPasteSwapForward)', { silent = true })
+
+-- Replace default paste with Yoink paste
+vim.keymap.set('n', 'p', '<Plug>(YoinkPaste_p)', { silent = true })
+vim.keymap.set('n', 'P', '<Plug>(YoinkPaste_P)', { silent = true })
+
+-- Replace default gp with Yoink paste
+vim.keymap.set('n', 'gp', '<Plug>(YoinkPaste_gp)', { silent = true })
+vim.keymap.set('n', 'gP', '<Plug>(YoinkPaste_gP)', { silent = true })
+
 
 vim.opt.clipboard:append("unnamedplus")
 

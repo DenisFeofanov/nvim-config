@@ -98,6 +98,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/vim-be-good",
     url = "https://github.com/ThePrimeagen/vim-be-good"
+  },
+  ["vim-yoink"] = {
+    loaded = true,
+    path = "/home/feofanov/.local/share/nvim/site/pack/packer/start/vim-yoink",
+    url = "https://github.com/svermeulen/vim-yoink"
   }
 }
 

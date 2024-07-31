@@ -72,6 +72,8 @@ vim.keymap.set('n', '<CR>', 'o<Esc>')
 vim.keymap.set('n', '<leader><CR>', 'O<Esc>')
 vim.keymap.set('n', '<leader>a', 'ggVG')
 vim.keymap.set('n', '<leader>ip', 'o<Esc>o<Esc>p')
+vim.keymap.set('n', '<leader>k', '<Cmd>call VSCodeCall("workbench.action.previousEditor")<CR>')
+vim.keymap.set('n', '<leader>j', '<Cmd>call VSCodeCall("workbench.action.nextEditor")<CR>')
 
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
@@ -92,17 +94,28 @@ vim.g.yoinkIncludeDeleteOperations = 1
 vim.g.yoinkSavePersistently = 1
 vim.g.yoinkAutoFormatPaste = 1
 -- Swap back and forward through yank history
-vim.keymap.set('n', '<leader>n', '<Plug>(YoinkPostPasteSwapBack)', { silent = true })
-vim.keymap.set('n', '<leader>p', '<Plug>(YoinkPostPasteSwapForward)', { silent = true })
+vim.keymap.set('n', '<leader>n', '<Plug>(YoinkPostPasteSwapBack)', {
+    silent = true
+})
+vim.keymap.set('n', '<leader>p', '<Plug>(YoinkPostPasteSwapForward)', {
+    silent = true
+})
 
 -- Replace default paste with Yoink paste
-vim.keymap.set('n', 'p', '<Plug>(YoinkPaste_p)', { silent = true })
-vim.keymap.set('n', 'P', '<Plug>(YoinkPaste_P)', { silent = true })
+vim.keymap.set('n', 'p', '<Plug>(YoinkPaste_p)', {
+    silent = true
+})
+vim.keymap.set('n', 'P', '<Plug>(YoinkPaste_P)', {
+    silent = true
+})
 
 -- Replace default gp with Yoink paste
-vim.keymap.set('n', 'gp', '<Plug>(YoinkPaste_gp)', { silent = true })
-vim.keymap.set('n', 'gP', '<Plug>(YoinkPaste_gP)', { silent = true })
-
+vim.keymap.set('n', 'gp', '<Plug>(YoinkPaste_gp)', {
+    silent = true
+})
+vim.keymap.set('n', 'gP', '<Plug>(YoinkPaste_gP)', {
+    silent = true
+})
 
 vim.opt.clipboard:append("unnamedplus")
 

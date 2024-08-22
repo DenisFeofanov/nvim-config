@@ -55,10 +55,11 @@ vim.opt.smartcase = true
 
 -- Key mappings
 
-vim.api.nvim_set_keymap('n', '<leader>c', ':lua open_nvim_config()<CR>', {
+vim.api.nvim_set_keymap('n', '<leader>i', ':lua open_nvim_config()<CR>', {
     noremap = true,
     silent = true
 })
+
 vim.keymap.set('n', '<leader>h', ':noh<CR>')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -71,7 +72,6 @@ vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindR
 vim.keymap.set('n', '<CR>', 'o<Esc>')
 vim.keymap.set('n', '<leader><CR>', 'O<Esc>')
 vim.keymap.set('n', '<leader>a', 'ggVG')
-vim.keymap.set('n', '<leader>ip', 'o<Esc>o<Esc>p')
 vim.keymap.set('n', '<leader>k', '<Cmd>call VSCodeCall("workbench.action.previousEditor")<CR>')
 vim.keymap.set('n', '<leader>j', '<Cmd>call VSCodeCall("workbench.action.nextEditor")<CR>')
 vim.keymap.set('n', '<leader>q', '<Cmd>call VSCodeCall("workbench.action.quickOpen")<CR>')

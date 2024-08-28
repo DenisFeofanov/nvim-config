@@ -1,3 +1,5 @@
+require("feofan")
+
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -48,10 +50,9 @@ require('substitute').setup({
 
 -- Set options
 vim.opt.number = true
-vim.opt.relativenumber = true
-vim.g.mapleader = " "
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.relativenumber = true
 
 -- Key mappings
 

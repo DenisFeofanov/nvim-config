@@ -21,6 +21,18 @@ require('packer').startup(function(use)
     use 'gbprod/cutlass.nvim'
     use 'gbprod/substitute.nvim'
     use 'svermeulen/vim-yoink'
+    use {
+	    'NeogitOrg/neogit',
+	    requires = {
+		    'nvim-lua/plenary.nvim',         -- required dependency
+		    'sindrets/diffview.nvim',        -- optional - for enhanced diff views
+		    'nvim-telescope/telescope.nvim', -- optional - for fuzzy finding
+	    },
+	    config = function()
+		    local neogit = require('neogit')
+		    neogit.setup {}
+	    end
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

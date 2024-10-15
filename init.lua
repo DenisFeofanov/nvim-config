@@ -91,6 +91,7 @@ vim.keymap.set('n', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
 vim.keymap.set('v', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('v', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
+vim.keymap.set('n', '<leader>b', 'va{V')
 
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {

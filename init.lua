@@ -1,5 +1,4 @@
 require("feofan")
-
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -10,9 +9,7 @@ local ensure_packer = function()
     end
     return false
 end
-
 local packer_bootstrap = ensure_packer()
-
 -- Plugin management with packer
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
@@ -22,57 +19,48 @@ require('packer').startup(function(use)
     use 'gbprod/substitute.nvim'
     use 'svermeulen/vim-yoink'
     use {
-	    'NeogitOrg/neogit',
-	    requires = {
-		    'nvim-lua/plenary.nvim',         -- required dependency
-		    'sindrets/diffview.nvim',        -- optional - for enhanced diff views
-		    'nvim-telescope/telescope.nvim', -- optional - for fuzzy finding
-	    },
-	    config = function()
-		    local neogit = require('neogit')
-		    neogit.setup {}
-	    end
+        'NeogitOrg/neogit',
+        requires = {'nvim-lua/plenary.nvim', -- required dependency
+        'sindrets/diffview.nvim', -- optional - for enhanced diff views
+        'nvim-telescope/telescope.nvim' -- optional - for fuzzy finding
+        },
+        config = function()
+            local neogit = require('neogit')
+            neogit.setup {}
+        end
     }
-
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
         require('packer').sync()
     end
 end)
-
 -- Configure nvim-surround
 require("nvim-surround").setup({
     -- Configuration options here
 })
-
 -- Configure cutlass
 require('cutlass').setup({
     cut_key = 'x',
     override_del = nil,
     exclude = {}
 })
-
 -- Configure substitute
 require('substitute').setup({
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
 })
-
 -- Set options
 vim.opt.number = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.relativenumber = true
-
 -- Key mappings
-
 vim.api.nvim_set_keymap('n', '<leader>i', ':lua open_nvim_config()<CR>', {
     noremap = true,
     silent = true
 })
-
 vim.keymap.set('n', '<leader>h', ':noh<CR>')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -92,7 +80,6 @@ vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindR
 vim.keymap.set('v', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('v', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
 vim.keymap.set('n', '<leader>b', 'va{V')
-
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
     noremap = true
@@ -106,7 +93,6 @@ vim.keymap.set("n", "S", "<cmd>lua require('substitute').eol()<cr>", {
 vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", {
     noremap = true
 })
-
 -- vim yoink config
 vim.g.yoinkIncludeDeleteOperations = 1
 vim.g.yoinkSavePersistently = 1
@@ -118,7 +104,6 @@ vim.keymap.set('n', '<leader>n', '<Plug>(YoinkPostPasteSwapBack)', {
 vim.keymap.set('n', '<leader>p', '<Plug>(YoinkPostPasteSwapForward)', {
     silent = true
 })
-
 -- Replace default paste with Yoink paste
 vim.keymap.set('n', 'p', '<Plug>(YoinkPaste_p)', {
     silent = true
@@ -126,7 +111,6 @@ vim.keymap.set('n', 'p', '<Plug>(YoinkPaste_p)', {
 vim.keymap.set('n', 'P', '<Plug>(YoinkPaste_P)', {
     silent = true
 })
-
 -- Replace default gp with Yoink paste
 vim.keymap.set('n', 'gp', '<Plug>(YoinkPaste_gp)', {
     silent = true
@@ -147,9 +131,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         })
     end
 })
-
 -- Function to open Neovim configuration
 _G.open_nvim_config = function()
     vim.cmd('edit ~/.config/nvim/init.lua')
 end
-

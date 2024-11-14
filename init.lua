@@ -1,4 +1,6 @@
 require("feofan")
+
+
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -9,6 +11,7 @@ local ensure_packer = function()
     end
     return false
 end
+
 local packer_bootstrap = ensure_packer()
 -- Plugin management with packer
 require('packer').startup(function(use)
@@ -17,7 +20,6 @@ require('packer').startup(function(use)
     use 'kylechui/nvim-surround'
     use 'gbprod/cutlass.nvim'
     use 'gbprod/substitute.nvim'
-    use 'svermeulen/vim-yoink'
     use {
         'NeogitOrg/neogit',
         requires = {'nvim-lua/plenary.nvim', -- required dependency
@@ -79,6 +81,12 @@ vim.keymap.set('n', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
 vim.keymap.set('v', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('v', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
+-- This will make all yanks/pastes use system clipboard by default
+vim.keymap.set('n', 'y', '"+y', { desc = 'Yank to system clipboard' })
+vim.keymap.set('v', 'y', '"+y', { desc = 'Yank to system clipboard' })
+vim.keymap.set('n', 'Y', '"+Y', { desc = 'Yank line to system clipboard' })
+vim.keymap.set('n', 'p', '"+p', { desc = 'Paste from system clipboard after cursor' })
+vim.keymap.set('n', 'P', '"+P', { desc = 'Paste from system clipboard before cursor' })
 vim.keymap.set('n', '<leader>b', 'va{V')
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
@@ -93,33 +101,6 @@ vim.keymap.set("n", "S", "<cmd>lua require('substitute').eol()<cr>", {
 vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", {
     noremap = true
 })
--- vim yoink config
-vim.g.yoinkIncludeDeleteOperations = 1
-vim.g.yoinkSavePersistently = 1
-vim.g.yoinkAutoFormatPaste = 1
--- Swap back and forward through yank history
-vim.keymap.set('n', '<leader>n', '<Plug>(YoinkPostPasteSwapBack)', {
-    silent = true
-})
-vim.keymap.set('n', '<leader>p', '<Plug>(YoinkPostPasteSwapForward)', {
-    silent = true
-})
--- Replace default paste with Yoink paste
-vim.keymap.set('n', 'p', '<Plug>(YoinkPaste_p)', {
-    silent = true
-})
-vim.keymap.set('n', 'P', '<Plug>(YoinkPaste_P)', {
-    silent = true
-})
--- Replace default gp with Yoink paste
-vim.keymap.set('n', 'gp', '<Plug>(YoinkPaste_gp)', {
-    silent = true
-})
-vim.keymap.set('n', 'gP', '<Plug>(YoinkPaste_gP)', {
-    silent = true
-})
-
-vim.opt.clipboard:append("unnamedplus")
 
 -- Set up highlight for yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {

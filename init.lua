@@ -79,14 +79,6 @@ vim.keymap.set('n', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
 vim.keymap.set('v', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('v', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
-vim.keymap.set('n', '<leader>w', ':update<CR>', { silent = true })
-vim.keymap.set('n', '<leader>e', '<Cmd>call VSCodeCall("workbench.action.closeEditorsInGroup")<CR>', { silent = true })
--- This will make all yanks/pastes use system clipboard by default
--- vim.keymap.set('n', 'y', '"+y', { desc = 'Yank to system clipboard' })
--- vim.keymap.set('v', 'y', '"+y', { desc = 'Yank to system clipboard' })
--- vim.keymap.set('n', 'Y', '"+Y', { desc = 'Yank line to system clipboard' })
--- vim.keymap.set('n', 'p', '"+p', { desc = 'Paste from system clipboard after cursor' })
--- vim.keymap.set('n', 'P', '"+P', { desc = 'Paste from system clipboard before cursor' })
 vim.keymap.set('n', '<leader>b', 'va{V')
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {

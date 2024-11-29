@@ -74,12 +74,15 @@ vim.keymap.set('n', '<leader>a', 'ggVG')
 vim.keymap.set('n', '<leader>q', '<Cmd>call VSCodeCall("workbench.action.quickOpen")<CR>')
 vim.keymap.set('n', '<leader>gc', '<Cmd>call VSCodeCall("git.viewChanges")<CR>')
 vim.keymap.set('n', 'gt', '<Cmd>call VSCodeCall("editor.action.goToTypeDefinition")<CR>')
-vim.keymap.set('n', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
 vim.keymap.set('v', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('v', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
 vim.keymap.set('n', '<leader>b', 'va{V')
-
+vim.keymap.set('n', '<leader>w', ':update<CR>', { silent = true })
+vim.keymap.set('n', '<leader>e', '<Cmd>call VSCodeCall("workbench.action.closeEditorsInGroup")<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>i', ':lua open_nvim_config()<CR>', {
+    noremap = true,
+})
 -- Better shortcut for commenting 
 vim.keymap.set('', '<leader>c', 'gc', { remap = true })
 
@@ -87,12 +90,6 @@ vim.keymap.set('', '<leader>c', 'gc', { remap = true })
 vim.cmd('autocmd BufEnter * set formatoptions-=cro')
 vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
 
-vim.keymap.set('n', '<leader>w', ':update<CR>', { silent = true })
-vim.keymap.set('n', '<leader>e', '<Cmd>call VSCodeCall("workbench.action.closeEditorsInGroup")<CR>', { silent = true })
--- Key mappings
-vim.api.nvim_set_keymap('n', '<leader>i', ':lua open_nvim_config()<CR>', {
-    noremap = true,
-})
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
     noremap = true

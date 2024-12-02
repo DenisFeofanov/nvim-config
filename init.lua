@@ -73,6 +73,7 @@ vim.keymap.set('n', '<leader>w', '<Cmd>call VSCodeCall("workbench.action.showAll
 vim.keymap.set('n', '<CR>', 'o<Esc>')
 vim.keymap.set('n', '<leader><CR>', 'O<Esc>')
 vim.keymap.set('n', '<leader>a', 'ggVG')
+vim.keymap.set('n', '<leader>q', '<Cmd>call VSCodeCall("workbench.action.quickOpen")<CR>')
 vim.keymap.set('n', '<leader>gc', '<Cmd>call VSCodeCall("git.viewChanges")<CR>')
 vim.keymap.set('n', 'gt', '<Cmd>call VSCodeCall("editor.action.goToTypeDefinition")<CR>')
 vim.keymap.set('n', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
@@ -80,6 +81,10 @@ vim.keymap.set('n', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindR
 vim.keymap.set('v', '<leader>f', '<Cmd>call VSCodeCall("actions.find")<CR>')
 vim.keymap.set('v', '<leader>r', '<Cmd>call VSCodeCall("editor.action.startFindReplaceAction")<CR>')
 vim.keymap.set('n', '<leader>b', 'va{V')
+
+-- Better shortcut for commenting 
+vim.keymap.set('', '<leader>c', 'gc', { remap = true })
+
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
     noremap = true
@@ -93,6 +98,7 @@ vim.keymap.set("n", "S", "<cmd>lua require('substitute').eol()<cr>", {
 vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", {
     noremap = true
 })
+
 
 -- Set up highlight for yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {

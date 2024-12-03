@@ -85,6 +85,10 @@ vim.keymap.set('n', '<leader>b', 'va{V')
 -- Better shortcut for commenting 
 vim.keymap.set('', '<leader>c', 'gc', { remap = true })
 
+-- Don't add a comment line when standing on a comment line
+vim.cmd('autocmd BufEnter * set formatoptions-=cro')
+vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
+
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
     noremap = true

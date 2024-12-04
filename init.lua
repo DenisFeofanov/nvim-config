@@ -68,8 +68,6 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
-vim.keymap.set('n', '<leader>s', '<Cmd>call VSCodeCall("workbench.action.gotoSymbol")<CR>')
-vim.keymap.set('n', '<leader>w', '<Cmd>call VSCodeCall("workbench.action.showAllSymbols")<CR>')
 vim.keymap.set('n', '<CR>', 'o<Esc>')
 vim.keymap.set('n', '<leader><CR>', 'O<Esc>')
 vim.keymap.set('n', '<leader>a', 'ggVG')
@@ -89,6 +87,12 @@ vim.keymap.set('', '<leader>c', 'gc', { remap = true })
 vim.cmd('autocmd BufEnter * set formatoptions-=cro')
 vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
 
+vim.keymap.set('n', '<leader>w', ':update<CR>', { silent = true })
+vim.keymap.set('n', '<leader>e', '<Cmd>call VSCodeCall("workbench.action.closeEditorsInGroup")<CR>', { silent = true })
+-- Key mappings
+vim.api.nvim_set_keymap('n', '<leader>i', ':lua open_nvim_config()<CR>', {
+    noremap = true,
+})
 -- Substitute mappings
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", {
     noremap = true

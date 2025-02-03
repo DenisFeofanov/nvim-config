@@ -119,3 +119,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 _G.open_nvim_config = function()
     vim.cmd('edit ~/.config/nvim/init.lua')
 end
+
+vim.opt.hlsearch = false
